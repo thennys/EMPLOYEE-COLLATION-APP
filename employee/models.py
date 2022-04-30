@@ -32,9 +32,9 @@ class EmployeeRecords(models.Model):
 	middle_name			= models.CharField(max_length=255)
 	date_of_graduation =models.DateField()
 	date_of_employment =models.DateField()
-	position= models.CharField(max_length=255,choices=POSITION_CHOICES ,default=FRONTEND)
+	position= models.CharField(max_length=255,choices=POSITION_CHOICES,default=FRONTEND)
 	salary 				= models.IntegerField()
-	supervisors 		= models.ManyToManyField(Supervisors, blank=True)
+	supervisors 		= models.ManyToManyField(Supervisors,blank=True)
 	employee_code 		= models.CharField(max_length=6,blank=True, null=True)
 	
 	def save(self, *args, **kwargs):

@@ -1,9 +1,11 @@
+from cmath import e
+from logging import exception
+from tkinter import E
 from .models import EmployeeRecords, Supervisors, UploadLogs 
-from openpyxl import Workbook
+from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
 
-
-"""Logical functions"""
+# Logical functions
 
 def ValidateSupervisorCreation(get_employee_code):
 	if EmployeeRecords.objects.filter(employee_code=get_employee_code).exists():
@@ -13,9 +15,8 @@ def ValidateSupervisorCreation(get_employee_code):
 		return None
 
 
-
 def UploadExcelAndValidation(excel_file):
-	
+	work_book = Workbook()
 	# Load spreadsheet
 	work_book 				= load_workbook(excel_file, data_only=True)
 	
@@ -87,6 +88,7 @@ def UploadExcelAndValidation(excel_file):
 
 				supervisors				= a_row_value_array[6]
 				
+
 				# Saving employee into database
 				try:
 					employee 				= EmployeeRecords.objects.create(
@@ -109,18 +111,17 @@ def UploadExcelAndValidation(excel_file):
 						# If the employee does not have a supervisor account
 						else:
 							supervisor = Supervisors.objects.create(supervisor=supervisor_key_name)
-							supervisor.save()
 							employee.supervisors.add(supervisor)
 
 					succesful_rows_passed+=1
 					duplicatedDetectArray.append(concatenateRowValues)
 
-				except:
+				except Exception as e:
 					is_error 		= True
-					error_message 	= "Supervisor's employee code does not exist"
+					#error_message 	= "Supervisor's employee code does not exist"
+					error_message = e
 					break
-
-							
+		
 			total_rows+=1
 	# Saving and returning log
 	if is_error==False:
@@ -136,7 +137,3 @@ def UploadExcelAndValidation(excel_file):
 		saveLog.save()
 
 	return [duplicateDetectCount, succesful_rows_passed, is_error, error_message]
-	
- 
- 
- 
