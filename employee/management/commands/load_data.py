@@ -1,6 +1,8 @@
 from django.core.management.base import BaseCommand
 from django.contrib.auth.models import User
 
+
+""" using Django fixtures """
 class Command(BaseCommand):
     help = 'Admin user automated creation'
     

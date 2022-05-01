@@ -1,6 +1,4 @@
-from cmath import e
 from logging import exception
-from tkinter import E
 from .models import EmployeeRecords, Supervisors, UploadLogs 
 from openpyxl.workbook import Workbook
 from openpyxl import load_workbook
@@ -123,7 +121,7 @@ def UploadExcelAndValidation(excel_file):
 					break
 		
 			total_rows+=1
-	# Saving and returning log
+	"""Saving and returning log """
 	if is_error==False:
 		saveLog = UploadLogs.objects.create(
 					number_of_employee_records_uploaded= succesful_rows_passed,

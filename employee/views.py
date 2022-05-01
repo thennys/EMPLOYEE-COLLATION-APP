@@ -40,7 +40,8 @@ def AddEmployeeView(request):
 	employees 	= EmployeeRecords.objects.all()
 	context 	= {"employees":employees}
 	
-	# Taking form values on post
+	"""Taking form values on post"""
+ 
 	if request.method =='POST':
 		first_name    				=  request.POST.get('first_name')
 		middle_name   				=  request.POST.get('middle_name')
@@ -58,7 +59,7 @@ def AddEmployeeView(request):
 								salary=salary)
 			employee.save()
 
-			# If no supervisor was selected
+			"""If no supervisor was selected"""
 			if len(getSupervisors)==0:
 				pass
 			# If one or more supervisor(s) were selected

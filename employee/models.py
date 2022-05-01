@@ -1,3 +1,4 @@
+
 from django.db import models
 
 import random
@@ -17,7 +18,7 @@ POSITION_CHOICES = [
         (BOSS , 'boss'),
     ]
 """ DATABASE FOR  EMPLOYEES"""
-# Employee code is the required argument for creating supervisor
+""" Employee code is the required argument for creating supervisor """
 class Supervisors(models.Model):
 	supervisor  		= models.CharField(max_length=100)
 
@@ -30,9 +31,9 @@ class Supervisors(models.Model):
 class EmployeeRecords(models.Model):
 	first_name 			= models.CharField(max_length=255)
 	middle_name			= models.CharField(max_length=255)
-	date_of_graduation =models.DateField()
-	date_of_employment =models.DateField()
-	position= models.CharField(max_length=255,choices=POSITION_CHOICES,default=FRONTEND)
+	date_of_graduation  = models.DateField()
+	date_of_employment  = models.DateField()
+	position            = models.CharField(max_length=255,choices=POSITION_CHOICES,default=FRONTEND)
 	salary 				= models.IntegerField()
 	supervisors 		= models.ManyToManyField(Supervisors,blank=True)
 	employee_code 		= models.CharField(max_length=6,blank=True, null=True)
@@ -48,11 +49,10 @@ class EmployeeRecords(models.Model):
 
 	class Meta:
 		verbose_name_plural = "Employee Records"
-  
-  
-  
-  
-  
+
+
+
+"""Logss upload models """
 class UploadLogs(models.Model):
 	timestamp_of_upload 				= models.DateTimeField(auto_now_add=True)
 	number_of_employee_records_uploaded = models.IntegerField()
